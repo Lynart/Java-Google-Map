@@ -1,4 +1,4 @@
 Message to Alex and Mark
 
-Make a github account and then download the GUI/bash whatever. I will teach you guys how to use it
-tmr.
+Create a branch using git GUI Branch -> New and name the branch with your user name. Whenever you wish to commit your work, push it into your branch. Once code is fully working, push it into your MASTER and request a "PULL" to my main.
+

@@ -222,10 +222,10 @@ private void _displayImgInFrame() {
   GUIUtils.centerOnScreen(frame);
   frame.setVisible(true);
 */
- mapPanel.removeAll();
- mapPanel.add(null, new ImageIcon(_img).getImage());
- //ImagePanel panel = new ImagePanel(new ImageIcon("images/background.png").getImage()); 
- mapPanel.repaint();
+	mapPanel.removeAll();
+	mapPanel.repaint();
+	JLabel imgLbl=new JLabel(new ImageIcon(_img));
+	mapPanel.add(imgLbl);
 }
 
 private void _displayRespStrInFrame() {
@@ -435,6 +435,7 @@ private void initComponents() {
   		contentPanel.add(panel1, new TableLayoutConstraints(0, 0, 0, 0, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
   		//======== scrollPane1 ========
+  		/*
   		{
   			scrollPane1.setBorder(new TitledBorder("System.out - displays all status and progress messages, etc."));
   			scrollPane1.setOpaque(false);
@@ -445,7 +446,7 @@ private void initComponents() {
   			scrollPane1.setViewportView(ttaStatus);
   		}
   		contentPanel.add(scrollPane1, new TableLayoutConstraints(0, 1, 0, 1, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
-
+		*/
   		//======== panel2 ========
   		{
   			panel2.setOpaque(false);
@@ -496,22 +497,20 @@ private void initComponents() {
   			lblProgressStatus.setToolTipText("Task status messages are displayed here when the task runs");
   			panel2.add(lblProgressStatus, new TableLayoutConstraints(2, 1, 2, 1, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
   		}
-  		contentPanel.add(panel2, new TableLayoutConstraints(0, 2, 0, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
+  		contentPanel.add(panel2, new TableLayoutConstraints(0, 1, 0, 1, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
+  	  //Vince's addition
+  	  mapPanel=new JPanel();
+  	  mapPanel.setOpaque(false);
+  	  mapPanel.setBorder(new CompoundBorder(new TitledBorder("Map will be displayed here"),Borders.DLU2_BORDER));
+  	  mapPanel.setSize(640,640);
+  	  contentPanel.add(mapPanel,new TableLayoutConstraints(0, 2, 0, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
   	}
   	dialogPane.add(contentPanel, BorderLayout.CENTER);
   }
-  contentPane.add(dialogPane, BorderLayout.WEST);
-  //Vince's addition
-  mapPanel=new JPanel();
-  mapPanel.setOpaque(false);
-  mapPanel.setBorder(new CompoundBorder(new TitledBorder("Map will be displayed here"),Borders.DLU2_BORDER));
-  mapPanel.setSize(640,640);
-  //mapLabel=new JLabel();
-  //mapLabel.add(mapLabel);
-  contentPane.add(mapPanel,BorderLayout.CENTER);
+  contentPane.add(dialogPane, BorderLayout.CENTER);
   Toolkit tk =  Toolkit.getDefaultToolkit ();
   Dimension dim = tk.getScreenSize();
-  setSize(dim.width, dim.height-100);
+  setSize(1024, dim.height-100);
   setLocationRelativeTo(null);
   // JFormDesigner - End of component initialization  //GEN-END:initComponents
 }
@@ -546,5 +545,4 @@ private JProgressBar progressBar;
 private JLabel lblProgressStatus;
 // JFormDesigner - End of variables declaration  //GEN-END:variables
 private JPanel mapPanel;
-private JLabel mapLabel;
 }

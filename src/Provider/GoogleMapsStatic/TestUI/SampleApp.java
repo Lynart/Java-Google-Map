@@ -201,28 +201,56 @@ private SwingUIHookAdapter _initHook(SwingUIHookAdapter hook) {
 
 private void _displayImgInFrame() {
 
-  final JFrame frame = new JFrame("Google Static Map");
-  GUIUtils.setAppIcon(frame, "71.png");
-  frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+  //final JFrame frame = new JFrame("Google Static Map");
+  //GUIUtils.setAppIcon(frame, "71.png");
+  //frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 
-  JLabel imgLbl = new JLabel(new ImageIcon(_img));
-  imgLbl.setToolTipText(MessageFormat.format("<html>Image downloaded from URI<br>size: w={0}, h={1}</html>",
-                                             _img.getWidth(), _img.getHeight()));
-  imgLbl.addMouseListener(new MouseListener() {
-    public void mouseClicked(MouseEvent e) {}
-    public void mousePressed(MouseEvent e) { frame.dispose();}
-    public void mouseReleased(MouseEvent e) { }
-    public void mouseEntered(MouseEvent e) { }
-    public void mouseExited(MouseEvent e) { }
-  });
+ // JLabel imgLbl = new JLabel(new ImageIcon(_img));
+ // imgLbl.setToolTipText(MessageFormat.format("<html>Image downloaded from URI<br>size: w={0}, h={1}</html>",
+//                                             _img.getWidth(), _img.getHeight()));
+//  imgLbl.addMouseListener(new MouseListener() {
+ //   public void mouseClicked(MouseEvent e) {}
+   // public void mousePressed(MouseEvent e) { frame.dispose();}
+   // public void mouseReleased(MouseEvent e) { }
+   // public void mouseEntered(MouseEvent e) { }
+   // public void mouseExited(MouseEvent e) { }
+  //});
 
-  frame.setContentPane(imgLbl);
-  frame.pack();
+ // frame.setContentPane(imgLbl);
+ // frame.pack();
 
-  GUIUtils.centerOnScreen(frame);
-  frame.setVisible(true);
+//  GUIUtils.centerOnScreen(frame);
+//  frame.setVisible(true);
+	mapPanel.removeAll();
+	mapPanel.repaint();
+	JLabel imgLbl=new JLabel(new ImageIcon(_img));
+	mapPanel.add(imgLbl);
+	
 }
+private void _displayImgInFrame(JPanel imgLbl) {
 
+	//final JFrame frame = new JFrame("Google Static Map");
+	//GUIUtils.setAppIcon(frame, "71.png");
+	//frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+
+	 // imgLbl = new JPanel(new ImageIcon(_img));
+	  imgLbl.setToolTipText(MessageFormat.format("<html>Image downloaded from URI<br>size: w={0}, h={1}</html>",
+	                                             _img.getWidth(), _img.getHeight()));
+	  //imgLbl.
+	  imgLbl.addMouseListener(new MouseListener() {
+	    public void mouseClicked(MouseEvent e) {}
+	    public void mousePressed(MouseEvent e) {}
+	    public void mouseReleased(MouseEvent e) { }
+	    public void mouseEntered(MouseEvent e) { }
+	    public void mouseExited(MouseEvent e) { }
+	  });
+
+	  //frame.setContentPane(imgLbl);
+	  //frame.pack();
+
+	  //GUIUtils.centerOnScreen(frame);
+	  //frame.setVisible(true);
+	}
 private void _displayRespStrInFrame() {
 
   final JFrame frame = new JFrame("Google Static Map - Error");
@@ -315,7 +343,8 @@ private void initComponents() {
   ttfProgressMsg = new JTextField();
   progressBar = new JProgressBar();
   lblProgressStatus = new JLabel();
-
+  //Added by Vince
+  mapPanel=new JPanel();
   //======== this ========
   setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
   setTitle("Google Static Maps");
@@ -354,7 +383,7 @@ private void initComponents() {
   			label2.setText("Size Width");
   			label2.setHorizontalAlignment(SwingConstants.RIGHT);
   			panel1.add(label2, new TableLayoutConstraints(0, 0, 0, 0, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
-
+  			
   			//---- ttfSizeW ----
   			ttfSizeW.setText("512");
   			panel1.add(ttfSizeW, new TableLayoutConstraints(1, 0, 1, 0, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
@@ -430,7 +459,7 @@ private void initComponents() {
   		contentPanel.add(panel1, new TableLayoutConstraints(0, 0, 0, 0, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
 
   		//======== scrollPane1 ========
-  		{
+  		/*{
   			scrollPane1.setBorder(new TitledBorder("System.out - displays all status and progress messages, etc."));
   			scrollPane1.setOpaque(false);
 
@@ -440,7 +469,7 @@ private void initComponents() {
   			scrollPane1.setViewportView(ttaStatus);
   		}
   		contentPanel.add(scrollPane1, new TableLayoutConstraints(0, 1, 0, 1, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
-
+		*/
   		//======== panel2 ========
   		{
   			panel2.setOpaque(false);
@@ -491,12 +520,28 @@ private void initComponents() {
   			lblProgressStatus.setToolTipText("Task status messages are displayed here when the task runs");
   			panel2.add(lblProgressStatus, new TableLayoutConstraints(2, 1, 2, 1, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
   		}
-  		contentPanel.add(panel2, new TableLayoutConstraints(0, 2, 0, 2, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
+  		contentPanel.add(panel2, new TableLayoutConstraints(0, 1, 0, 1, TableLayoutConstraints.FULL, TableLayoutConstraints.FULL));
+  		//Map Panel by Vince
+  		{
+  			mapPanel.setVisible(true);
+  			mapPanel.setBorder(new CompoundBorder(
+  	  				new TitledBorder("Map will be displayed here"),
+  	  				Borders.DLU2_BORDER));
+  			/*mapPanel.setLayout(new TableLayout(new double[][] {
+  	  				{0.9, TableLayout.FILL, 0.9},
+  	  				{TableLayout.PREFERRED, TableLayout.PREFERRED}}));
+  	  			((TableLayout)panel2.getLayout()).setHGap(5);
+  	  			((TableLayout)panel2.getLayout()).setVGap(5);*/
+  		}
   	}
   	dialogPane.add(contentPanel, BorderLayout.CENTER);
   }
-  contentPane.add(dialogPane, BorderLayout.CENTER);
-  setSize(675, 485);
+  Toolkit tk=java.awt.Toolkit.getDefaultToolkit();
+  Dimension screensize=tk.getScreenSize();
+  //Thanks Neil!
+  contentPane.add(dialogPane, BorderLayout.WEST);
+  contentPane.add(mapPanel, BorderLayout.CENTER);
+  setSize((int)(screensize.width), screensize.height-100);
   setLocationRelativeTo(null);
   // JFormDesigner - End of component initialization  //GEN-END:initComponents
 }
@@ -506,6 +551,7 @@ private void initComponents() {
 private JPanel dialogPane;
 private JPanel contentPanel;
 private JPanel panel1;
+private JPanel mapPanel;
 private JLabel label2;
 private JTextField ttfSizeW;
 private JLabel label4;

@@ -200,7 +200,7 @@ private SwingUIHookAdapter _initHook(SwingUIHookAdapter hook) {
 }
 
 private void _displayImgInFrame() {
-
+/*
   final JFrame frame = new JFrame("Google Static Map");
   GUIUtils.setAppIcon(frame, "71.png");
   frame.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -221,6 +221,11 @@ private void _displayImgInFrame() {
 
   GUIUtils.centerOnScreen(frame);
   frame.setVisible(true);
+*/
+ mapPanel.removeAll();
+ mapPanel.add(null, new ImageIcon(_img).getImage());
+ //ImagePanel panel = new ImagePanel(new ImageIcon("images/background.png").getImage()); 
+ mapPanel.repaint();
 }
 
 private void _displayRespStrInFrame() {
@@ -495,8 +500,18 @@ private void initComponents() {
   	}
   	dialogPane.add(contentPanel, BorderLayout.CENTER);
   }
-  contentPane.add(dialogPane, BorderLayout.CENTER);
-  setSize(675, 485);
+  contentPane.add(dialogPane, BorderLayout.WEST);
+  //Vince's addition
+  mapPanel=new JPanel();
+  mapPanel.setOpaque(false);
+  mapPanel.setBorder(new CompoundBorder(new TitledBorder("Map will be displayed here"),Borders.DLU2_BORDER));
+  mapPanel.setSize(640,640);
+  //mapLabel=new JLabel();
+  //mapLabel.add(mapLabel);
+  contentPane.add(mapPanel,BorderLayout.CENTER);
+  Toolkit tk =  Toolkit.getDefaultToolkit ();
+  Dimension dim = tk.getScreenSize();
+  setSize(dim.width, dim.height-100);
   setLocationRelativeTo(null);
   // JFormDesigner - End of component initialization  //GEN-END:initComponents
 }
@@ -530,4 +545,6 @@ private JTextField ttfProgressMsg;
 private JProgressBar progressBar;
 private JLabel lblProgressStatus;
 // JFormDesigner - End of variables declaration  //GEN-END:variables
+private JPanel mapPanel;
+private JLabel mapLabel;
 }

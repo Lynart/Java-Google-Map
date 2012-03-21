@@ -527,11 +527,6 @@ private void initComponents() {
   			mapPanel.setBorder(new CompoundBorder(
   	  				new TitledBorder("Map will be displayed here"),
   	  				Borders.DLU2_BORDER));
-  			/*mapPanel.setLayout(new TableLayout(new double[][] {
-  	  				{0.9, TableLayout.FILL, 0.9},
-  	  				{TableLayout.PREFERRED, TableLayout.PREFERRED}}));
-  	  			((TableLayout)panel2.getLayout()).setHGap(5);
-  	  			((TableLayout)panel2.getLayout()).setVGap(5);*/
   		}
   	}
   	dialogPane.add(contentPanel, BorderLayout.CENTER);

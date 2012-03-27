@@ -338,17 +338,17 @@ public class SampleApp extends JFrame implements ChangeListener {
 		label2 = new JLabel();
 		ttfSizeW = new JTextField();
 		label4 = new JLabel();
-		ttfLat = new JTextField();
+		ttfLat = new JLabel();
 		btnGetMap = new JButton();
 		label3 = new JLabel();
 		ttfSizeH = new JTextField();
 		label5 = new JLabel();
-		ttfLon = new JTextField();
+		ttfLon = new JLabel();
 		btnQuit = new JButton();
 		label1 = new JLabel();
 		ttfLicense = new JTextField();
 		label6 = new JLabel();
-		ttfZoom = new JTextField();
+		ttfZoom = new JLabel();
 		scrollPane1 = new JScrollPane();
 		ttaStatus = new JTextArea();
 		statusPanel = new JPanel();
@@ -693,17 +693,20 @@ public class SampleApp extends JFrame implements ChangeListener {
 			dialogPane.add(contentPanel, BorderLayout.CENTER);// Positions all the panels in the center of the window
 
 		}
-			contentPanel.addKeyListener(new ArrowKeyActions());
-		  //Automatic resize on launch, by Vince
-		  //Note: Mark made a change here to make the UI look better :)
-		  //contentPane.add(dialogPane, BorderLayout.WEST);
-		  //contentPane.add(mapPanel, BorderLayout.CENTER);
-		  contentPane.add(dialogPane, BorderLayout.CENTER);
-		  Toolkit tk =  Toolkit.getDefaultToolkit ();
-		  Dimension dim = tk.getScreenSize();
-		  setSize(1024, dim.height-100);
-		  setLocationRelativeTo(null);
-		  //End of Vince's portion
+		//Adding listeners to allow keyboard commands
+		contentPanel.addMouseListener(new ClickMap());
+		contentPanel.addKeyListener(new ArrowKeyActions());
+		//Automatic resize on launch, by Vince
+		//Note: Mark made a change here to make the UI look better :)
+		//contentPane.add(dialogPane, BorderLayout.WEST);
+		//contentPane.add(mapPanel, BorderLayout.CENTER);
+		contentPane.add(dialogPane, BorderLayout.CENTER);
+		Toolkit tk =  Toolkit.getDefaultToolkit ();
+		Dimension dim = tk.getScreenSize();
+		setSize(1024, dim.height-100);
+		setLocationRelativeTo(null);
+		contentPanel.requestFocusInWindow();
+		//End of Vince's portion
 		// JFormDesigner - End of component initialization
 		// //GEN-END:initComponents
 	}
@@ -717,17 +720,17 @@ public class SampleApp extends JFrame implements ChangeListener {
 	private JLabel label2;
 	private JTextField ttfSizeW;
 	private JLabel label4;
-	private JTextField ttfLat;
+	private JLabel ttfLat;
 	private JButton btnGetMap;
 	private JLabel label3;
 	private JTextField ttfSizeH;
 	private JLabel label5;
-	private JTextField ttfLon;
+	private JLabel ttfLon;
 	private JButton btnQuit;
 	private JLabel label1;
 	private JTextField ttfLicense;
 	private JLabel label6;
-	private JTextField ttfZoom;
+	private JLabel ttfZoom;
 	private JScrollPane scrollPane1;
 	private JTextArea ttaStatus;
 	private JPanel statusPanel;
@@ -815,6 +818,40 @@ public class SampleApp extends JFrame implements ChangeListener {
 			// TODO Auto-generated method stub
 			
 		}
+	}
+	//Vince's focus issue (click on map for focus)
+	class ClickMap implements MouseListener{
+
+		@Override
+		public void mouseClicked(MouseEvent arg0) {
+			contentPanel.requestFocusInWindow();
+			
+		}
+
+		@Override
+		public void mouseEntered(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseExited(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mousePressed(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void mouseReleased(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+		
 	}
 	
 }

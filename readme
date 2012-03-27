@@ -1,4 +1,7 @@
-Message to Alex and Mark
+Instructions:
+Get Map -> Gets the map, no auto focus for arrow keys.
+Exit -> Closes program.
+Sliders -> Does stuff to map, auto focuses on map, allowing arrow keys.
+Size -> Changes the display size, does not auto focus for arrow keys.
 
-Create a branch using git GUI Branch -> New and name the branch with your user name. Whenever you wish to commit your work, push it into your branch. Once code is fully working, push it into your MASTER and request a "PULL" to my main.
-
+Known "visual" issues: sliders do not automatically update with arrow keys
